@@ -65,3 +65,6 @@ if source_radio == "VIDEO":
         play_video(temporary_location)
         if st.button("Replay", type="primary"):
             pass
+
+if source_radio == "WEBCAM":
+    play_video(0)
