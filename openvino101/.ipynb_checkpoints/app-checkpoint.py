@@ -1,5 +1,8 @@
 import streamlit as st
 import PIL
+import cv2
+import numpy as np
+import utils
 
 st.set_page_config(
     page_title="Age/Gender/Emotion",
@@ -20,4 +23,7 @@ if source_radio == "IMAGE":
 
     if input is not None:
         uploaded_image = PIL.Image.open(input)
-        st.image(uploaded_image)
+        uploaded_image_cv = cv2.cvtColor(np.array(uploaded_image), cv2.COLOR_RGB2BGR)
+        visualized_image = utils.predict_image(uploaded_image_cv, conf_threshold = .2)
+        
+        st.image(visualized_image, channels = "BGR")
