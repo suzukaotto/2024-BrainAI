@@ -47,6 +47,10 @@ if source_radio == "IMAGE":
         
         st.image(visualized_image, channels = "BGR")
 
+    else:
+        st.image("assets/sample_image.jpg")
+        st.write("Click on 'Browse Files' in the sidebar to run inference on an image")
+
 temporary_location = None
 if source_radio == "VIDEO":
     st.sidebar.header("Upload")
@@ -60,6 +64,9 @@ if source_radio == "VIDEO":
             out.write(g.read())
 
         out.close()
+    else:
+        st.video("assets/sample_video.mp4")
+        st.write("Click on 'Browse Files' in the sidebar to run inference on an video")
 
     if temporary_location is not None:
         play_video(temporary_location)
