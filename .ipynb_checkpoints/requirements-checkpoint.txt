@@ -3,6 +3,6 @@ openvino-dev==2024.0.0
 opencv-python==4.9.0.80
 ipywidgets==8.1.2
 tensorflow==2.13.1
-ultralytics
-gradio
-streamlit
+ultralytics==8.2.97
+gradio==3.50.2
+streamlit==1.37.1
