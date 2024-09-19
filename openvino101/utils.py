@@ -3,8 +3,6 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-
 core = ov.Core()
 
 # face model
@@ -27,8 +25,6 @@ compiled_model_ag = core.compile_model(model = model_ag, device_name="CPU")
 
 input_layer_ag = compiled_model_ag.input(0)
 output_layer_ag = compiled_model_ag.output(0)
-
-
 
 def preprocess(image, input_layer_face):
     N, input_channels, input_height, input_width = input_layer_face.shape
@@ -78,27 +74,28 @@ def draw_age_gender_emotion(face_boxes, frame):
         age, gender = results_ag[1], results_ag[0]
         age = np.squeeze(age)
         age = int(age*100)
+        # ----------------------
 
         gender = np.squeeze(gender)
         
         if (gender[0]>=0.65):
-            gender = "female"
-            box_color = (200, 200, 0)
+            gender = "FEMALE"
+            box_color = (0, 200, 200)
             
         elif (gender[1]>=0.55):
-            gender = "male"
-            box_color = (0, 200, 200)
+            gender = "MALE"
+            box_color = (200, 200, 0)
         
         else:
-            gender = "Unknown"
-            box_color = (0, 200, 200)
+            gender = "UNKNOWN"
+            box_color = (200, 200, 200)
             
         # -----------------------
 
         fontScale = frame.shape[1]/750
         
-        text = gender + ' ' + str(age) + ' ' + EMOTION_NAMES[index]
-        cv2.putText(show_frame, text, (xmin, ymin), cv2.FONT_HERSHEY_SIMPLEX, fontScale, (0, 200, 0), 3)
+        text = f"{gender} {str(age)} {EMOTION_NAMES[index]}"
+        cv2.putText(show_frame, text, (xmin, ymin-10), cv2.FONT_HERSHEY_SIMPLEX, fontScale, (0, 200, 0), 3)
         cv2.rectangle(img=show_frame, pt1=(xmin, ymin), pt2=(xmax, ymax), color=box_color, thickness=2)
 
     return show_frame
