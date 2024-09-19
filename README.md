@@ -1,3 +1,2 @@
 # Brain AI
-## Flatform
-jufytor
+flatform: jupyter, anaconda
