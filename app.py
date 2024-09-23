@@ -5,20 +5,34 @@ import numpy as np
 import utils
 import io
 
+conf_threshold = 0.5
+
 def play_video(video_source):
-    camera = cv2.VideoCapture(video_source)
+    if video_source == 0:
+        camera_input = st.camera_input("Camera Input")
+        st_frame = st.empty()
+        while True:
+            if camera_input:
+                frame = camera_input
+                visualized_image = utils.predict_image(frame, conf_threshold)
+                st_frame.image(visualized_image, channels="BGR")
+            else:
+                break
+    else:
+        camera = cv2.VideoCapture(video_source)
+        if not camera.isOpened():
+            st.error("Cannot open camera by index")
+            return
 
-    st_frame = st.empty()
-    while (camera.isOpened()):
-        ret, frame = camera.read()
-
-        if ret:
-            visualized_image = utils.predict_image(frame, conf_threshold)
-            st_frame.image(visualized_image, channels = "BGR")
-
-        else:
-            camera.release()
-            break
+        st_frame = st.empty()
+        while camera.isOpened():
+            ret, frame = camera.read()
+            if ret:
+                visualized_image = utils.predict_image(frame, conf_threshold)
+                st_frame.image(visualized_image, channels="BGR")
+            else:
+                camera.release()
+                break
 
 st.set_page_config(
     page_title="Age/Gender/Emotion",
