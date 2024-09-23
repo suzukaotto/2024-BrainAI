@@ -1,5 +1,3 @@
-
-
 import streamlit as st
 import PIL
 import cv2
@@ -8,7 +6,10 @@ import utils
 import io
 
 def play_video(video_source):
-    camera = cv2.VideoCapture(video_source)
+    if video_source == 0:
+        camera = st.camera_input()
+    else:
+        camera = cv2.VideoCapture(video_source)
 
     st_frame = st.empty()
     while (camera.isOpened()):
