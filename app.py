@@ -30,7 +30,7 @@ st.set_page_config(
 st.title("Age/Gender/Emotion :sun_with_face:")
 
 st.sidebar.header("Type")
-source_radio = st.sidebar.radio("Select Source", ["sIMAGE", "VIDEO", "WEBCAM"])
+source_radio = st.sidebar.radio("Select Source", ["IMAGE", "VIDEO", "WEBCAM"])
 
 st.sidebar.header("Confidence")
 conf_threshold = float(st.sidebar.slider("Select the Confidence Threshold", 10, 100, 20))/100
