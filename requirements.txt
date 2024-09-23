@@ -1,6 +1,8 @@
 openvino==2024.4.0
 openvino-dev==2024.4.0
 opencv-python==4.9.0.80
+numpy
+opencv-python-headless
 ipywidgets==8.1.2
 ultralytics==8.2.97
 gradio
