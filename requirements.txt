@@ -6,3 +6,4 @@ tensorflow==2.13.1
 ultralytics==8.2.97
 gradio==3.50.2
 streamlit==1.37.1
+opencv-python=4.10.0.84
